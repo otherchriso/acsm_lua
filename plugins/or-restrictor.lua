@@ -6,7 +6,7 @@ function addFixedRestrictorsForCars(championship, entryList)
 --
 --     <!-- Fixed restrictor:ks_ford_escort_mk1|70,alfa_romeo_gtam|0 -->
 --
--- Important syntax tips:
+-- Important syntax tips: 
 -- Use the string "Fixed restrictor:" including the colon and no extra space before the set
 -- Specify restrictor values as whole numbers only
 -- Remember only the first comment starting with "<!-- Fixed restrictor:" will be parsed
