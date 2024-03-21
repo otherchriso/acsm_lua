@@ -12,15 +12,15 @@ function addFixedRestrictorsForCars(championship, entryList)
 -- Remember only the first comment starting with "<!-- Fixed restrictor:" will be parsed
 --
 
-    -- search championship info for the Fixed setups HTML comment
+    -- search championship info for the restrictor HTML comment
     local commentStart, commentEnd = championship["Info"]:find("%<%!%--%sFixed%srestrictor:[^>]+-->")
     if commentStart == nil then
-        -- Fixed setups comment not found, return the original entry list
+        -- Restrictor comment not found, return the original entry list
         print("LUA: No comment found in the championship info defining any fixed restrictor to be applied.")
         return entryList
     end
 
-    -- extract the comment text and parse the fixed setups
+    -- extract the comment text and parse the restrictor values
     local comment = championship["Info"]:sub(commentStart, commentEnd)
     print("LUA: Championship restrictor info found: "..comment)
     local restrictors = {}
@@ -32,7 +32,7 @@ function addFixedRestrictorsForCars(championship, entryList)
         print("LUA: Fixed restrictor requested #"..i..": car="..restrictor.car..", restrictor="..restrictor.restrictor)
     end
 
-    -- loop over cars in the entry list and assign fixed setups
+    -- loop over cars in the entry list and assign fixed restrictors
     for carID, entrant in pairs(entryList) do
       for _, restrictor in ipairs(restrictors) do
         if entrant["Model"] == restrictor.car then
