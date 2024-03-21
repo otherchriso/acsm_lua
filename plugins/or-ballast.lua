@@ -12,15 +12,15 @@ function addFixedBallastsForCars(championship, entryList)
 -- Remember only the first comment starting with "<!-- Fixed ballast:" will be parsed
 --
 
-    -- search championship info for the Fixed setups HTML comment
+    -- search championship info for the Fixed ballast HTML comment
     local commentStart, commentEnd = championship["Info"]:find("%<%!%--%sFixed%sballast:[^>]+-->")
     if commentStart == nil then
-        -- Fixed setups comment not found, return the original entry list
+        -- Fixed ballast comment not found, return the original entry list
         print("LUA: No comment found in the championship info defining any fixed ballast to be applied.")
         return entryList
     end
 
-    -- extract the comment text and parse the fixed setups
+    -- extract the comment text and parse the ballast values
     local comment = championship["Info"]:sub(commentStart, commentEnd)
     print("LUA: Championship ballast info found: "..comment)
     local ballasts = {}
@@ -32,7 +32,7 @@ function addFixedBallastsForCars(championship, entryList)
         print("LUA: Fixed ballast requested #"..i..": car="..ballast.car..", ballast="..ballast.ballast)
     end
 
-    -- loop over cars in the entry list and assign fixed setups
+    -- loop over cars in the entry list and assign ballasts
     for carID, entrant in pairs(entryList) do
       for _, ballast in ipairs(ballasts) do
         if entrant["Model"] == ballast.car then
