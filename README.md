@@ -23,7 +23,7 @@ No support is offered for these scripts.
 
 The best support for anything ACSM-related is the [Emperor Servers Discord](https://discordapp.com/invite/6DGKJzB).
 
-It is highly recommended to test everything first in an ACSM installation that isn't your production server people rely on. The 'current config' page under ACSM's server menu is a good place to see the scripts operating withoug having to join the game.
+It is highly recommended to test everything first in an ACSM installation that isn't your production server people rely on. The 'current config' page under ACSM's server menu is a good place to see the scripts operating without having to join the game.
 
 ## Warranty
 No warranty is provided, or implied.
