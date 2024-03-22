@@ -29,4 +29,4 @@ It is highly recommended to test everything first in an ACSM installation that i
 No warranty is provided, or implied.
 
 ## License
-Yes the license file here is real. Some content has been adapted from https://github.com/JustaPenguin/assetto-server-manager which has its own license.
+Yes the license file here is real. Some content has been adapted from https://github.com/JustaPenguin/assetto-server-manager which has its own license (see [MIT License](https://github.com/JustaPenguin/assetto-server-manager?tab=MIT-1-ov-file#readme) over there)
