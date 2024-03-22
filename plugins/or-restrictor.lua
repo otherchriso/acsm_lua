@@ -36,7 +36,8 @@ function addFixedRestrictorsForCars(championship, entryList)
     for carID, entrant in pairs(entryList) do
       for _, restrictor in ipairs(restrictors) do
         if entrant["Model"] == restrictor.car then
-            entrant["Restrictor"] = restrictor.restrictor
+            entrant["Restrictor"] = entrant["Restrictor"] + restrictor.restrictor
+            print("LUA: Fixed restrictor applied to "..entrant["Model"].." (carID "..carID..") with value "..entrant["Restrictor"]..".")
         end
       end
     end

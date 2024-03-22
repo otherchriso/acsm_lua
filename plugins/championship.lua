@@ -16,7 +16,7 @@ function onChampionshipEventStart(encodedEvent, encodedChampionship, encodedClas
     -- Uncomment these lines and run the function (start any championship event, including practice events) to print out
     -- the structure of each object.
 
-    print("Event:", utils.dump(event))
+    --print("Event:", utils.dump(event))
     --print("Championship:", utils.dump(championship)) --championships can get pretty huge, this might exceed terminal limit
     --print("Standings:", utils.dump(standings))
 
@@ -29,17 +29,22 @@ function onChampionshipEventStart(encodedEvent, encodedChampionship, encodedClas
     -- load the addFixedSetupsForCars function from or-fixedsetups.lua
     local fixedSetups = require("or-fixedsetups")
     entryList = addFixedSetupsForCars(championship, entryList)
-    print("LUA: loaded the or-fixedsetups script.")
+    print("LUA: completed the or-fixedsetups script.")
 
     -- load the addBallastForCars function from or-ballast.lua
     local fixedBallasts = require("or-ballast")
     entryList = addFixedBallastsForCars(championship, entryList)
-    print("LUA: loaded the or-ballast script.")
+    print("LUA: completed the or-ballast script.")
 
     -- load the addRestrictorForCars function from or-restrictor.lua
     local fixedRestrictors = require("or-restrictor")
     entryList = addFixedRestrictorsForCars(championship, entryList)
-    print("LUA: loaded the or-restrictor script.")
+    print("LUA: completed the or-restrictor script.")
+
+    -- load the addSuccessBOPForCars function from or-success_bop.lua
+    local successBOP = require("or-success_bop")
+    entryList = addSuccessBOPForCars(championship, entryList, standings)
+    print("LUA: completed the or-success_bop script.")
 
     -- Encode block, you probably shouldn't touch these either!
     return json.encode(championship), json.encode(event), json.encode(entryList)
@@ -67,6 +72,7 @@ end
 
 -- add ballast to drivers for the championship event based on their current championship position
 function addBallastFromChampionshipPosition(entryList, standings, maxBallast)
+
     -- loop over each championship class
     for className,classStandings in pairs(standings) do
         -- loop over the standings for the class

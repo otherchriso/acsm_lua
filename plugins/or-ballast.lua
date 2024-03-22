@@ -36,7 +36,8 @@ function addFixedBallastsForCars(championship, entryList)
     for carID, entrant in pairs(entryList) do
       for _, ballast in ipairs(ballasts) do
         if entrant["Model"] == ballast.car then
-            entrant["Ballast"] = ballast.ballast
+            entrant["Ballast"] = entrant["Ballast"] + ballast.ballast
+            print("LUA: Fixed ballast applied to "..entrant["Model"].." (carID "..carID..") with value "..entrant["Ballast"]..".")
         end
       end
     end
