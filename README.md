@@ -16,7 +16,12 @@ Please note, there is an open source version at https://github.com/JustaPenguin/
 
 ## Known issues
 
-* Race Weekends not supported
+* Race Weekends not supported for ACSM before version 2.3.14 due to a bug in the application.
+
+## Installation
+
+* Install ACSM v2.x
+* Overwrite the contents of the plugins folder with the appropriate contents of this repo. I have not included all the regular Lua files here, and you will need those other ones.
 
 ## Support
 No support is offered for these scripts.
