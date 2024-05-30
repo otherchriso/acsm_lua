@@ -8,15 +8,18 @@ Please note, there is an open source version at https://github.com/JustaPenguin/
 
 ## Features
 * Define a fixed-setup that will be automatically applied to the cars chosen by a registrants
-* Define a fixed ballast that will be applied to all cars of a given type (added to any manually-applied ballast the championship admin might have also set on a person's entry slot)
-* Define a fixed restrictor that will be applied to all cars of a particular type  (added to any manually-applied restrictor the championship admin might have also set on a person's entry slot)
 * Override all ballast OR restrictor for registered entrants based on their position in the championship standings
 * Override all ballast OR restrictor for registered entrants based on their finishing order in the most recent championship race ("race 1" for events which had a second race in the session, e.g. ignoring result of reverse grid)
 * Override all ballast OR restrictor for registered entrants based on their finishing order in the most recent championship race ("race 2" for events which had a second race in the session, e.g. using the result of a reverse grid race)
 
+In addition, two features now redundant since ACSM v2.4.0 but usable if you need to run v2.3.13 or earlier:
+* Define a fixed ballast that will be applied to all cars of a given type (added to any manually-applied ballast the championship admin might have also set on a person's entry slot)
+* Define a fixed restrictor that will be applied to all cars of a particular type  (added to any manually-applied restrictor the championship admin might have also set on a person's entry slot)
+
+
 ## Known issues
 
-* Race Weekends not supported for ACSM before version 2.3.14 due to a bug in the application.
+* Race Weekends not supported for ACSM before version 2.4.0 due to a bug in the application.
 
 ## Installation
 
