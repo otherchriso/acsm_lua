@@ -92,7 +92,7 @@ function addBOPFromChampionshipEventPosition(championship, entryList, bopValue, 
         if (not (session["CompletedTime"] == "0001-01-01T00:00:00Z")) and (sessionType == "RACE" and (not reverseRace)) or (sessionType == "RACEx2" and reverseRace) then
             -- start at bopValue, decrease for each driver by diff
             local diff = 5
-            local value = bopValue
+            local value = tonumber(bopValue)
 
             for pos,result in pairs(session["Results"]["Result"]) do
                 -- find our entrant and apply BOP
