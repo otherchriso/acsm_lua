@@ -1,7 +1,6 @@
 function addSuccessBOPForCars(championship, entryList, standings)
 
     -- Assigns a BOP adjustment to cars triggered by hidden info in a championship's HTML-formatted `Info` field.
-    -- N.B. This will overwrite any pre-existing BOP adjustment which might have been applied in the entrylist.
     --
     -- For example, the function will search for an HTML comment in the `Info` field with the following structure:
     --
@@ -32,12 +31,19 @@ function addSuccessBOPForCars(championship, entryList, standings)
         -- determine whether the BOP adjustment is for ballast or restrictor, by how much, and what triggers it
         local comment = championship["Info"]:sub(commentStart, commentEnd)
         local bopType, bopValue, bopTrigger = comment:match("Success%sBOP:([^|]+)|([0-9]+)|([^|%s%-]+)")
+        -- Ensure bopType matches entryList key case
+        if bopType == "ballast" then
+            bopType = "Ballast"
+        elseif bopType == "restrictor" then
+            bopType = "Restrictor"
+        end
         print("LUA: Championship Success BOP info found: "..comment)
         print("LUA: Success BOP type: "..bopType..", value: "..bopValue..", trigger: "..bopTrigger)
 
-        -- alter the BOP
-        if bopType ~= "ballast" and bopType ~= "restrictor" then
-            print("LUA: Error: Success BOP type must be either 'ballast' or 'restrictor'.")
+        -- alter the BOP (allow for case-insensitive check)
+        local bopTypeLower = bopType:lower()
+        if bopTypeLower ~= "ballast" and bopTypeLower ~= "restrictor" then
+            print("LUA: Error: Success BOP type must be either 'ballast' or 'restrictor'. (Got '"..bopType.."')")
             return entryList
         end
         -- if the BOP adjustment is triggered by championship position
@@ -70,8 +76,9 @@ function addBOPFromChampionshipPosition(entryList, standings, bopValue, bopType)
                 -- if standing and entrant guids match
                 if entrant["GUID"] == standing["Car"]["Driver"]["Guid"] then
                     -- add BOP of correct type based on championship position
-                    entrant[bopType] = math.floor(bopValue/(pos))
-                    print("LUA: Applying "..bopType.." "..math.floor(bopValue/(pos)).." to car of "..entrant["Name"].." based on championship position: "..pos)
+                    print("LUA: Before BOP, "..entrant["Name"].." "..bopType.." = "..tostring(entrant[bopType]))
+                    entrant[bopType] = (entrant[bopType] or 0) + math.floor(bopValue/(pos))
+                    print("LUA: Applying "..bopType.." +"..math.floor(bopValue/(pos)).." (total: "..entrant[bopType]..") to car of "..entrant["Name"].." based on championship position: "..pos)
                 end
             end
         end
@@ -100,8 +107,8 @@ function addBOPFromChampionshipEventPosition(championship, entryList, bopValue, 
                     -- if standing and entrant guids match
                     if entrant["GUID"] == result["DriverGuid"] then
                         -- add BOP based on result in nth most recent 
-                        entrant[bopType] = value
-                        print("LUA: applying "..bopType.." of "..value.." to the car for "..result["DriverName"]..", who finished in pos "..pos.." at "..session["Results"]["TrackName"])
+                        entrant[bopType] = (entrant[bopType] or 0) + value
+                        print("LUA: applying "..bopType.." +"..value.." (total: "..entrant[bopType]..") to the car for "..result["DriverName"]..", who finished in pos "..pos.." at "..session["Results"]["TrackName"])
                         break
                     end
                 end
